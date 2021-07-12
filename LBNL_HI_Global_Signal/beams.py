@@ -34,6 +34,7 @@ def convert_amp_phase_txt_to_uvbeam(beam_folder, freqs=range(50, 250), beam_type
 
 
 
+
 def convert_realimag_ffs_to_amp_phase_txt(folder_path):
     '''
         Convert Real/Imag in FFS format to Mag/Phase for theta and phi components of E-fields
