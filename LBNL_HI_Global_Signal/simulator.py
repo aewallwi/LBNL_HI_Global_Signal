@@ -96,11 +96,6 @@ def compute_global_signal(
         fg_simulator.simulate()
         fg_simulator.uvdata.vis_units = "Jy"
         uvd_fg = fg_simulator.uvdata
-        if compress_by_redundancy:
-            # compress with quarter wavelength tolerance.
-            uvd_fg.compress_by_redundancy(tol=0.25 * 3e8 / uvd_fg.freq_array.max())
-        if not include_autos:
-            uvd_fg.select(bls=[ap for ap in uvd_fg.get_antpairs() if ap[0] != ap[1]], inplace=True)
         uvd_fg.write_uvh5(fg_file_name, clobber=True)
     else:
         uvd_fg = UVData()

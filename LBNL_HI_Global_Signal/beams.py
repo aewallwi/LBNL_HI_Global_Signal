@@ -1,12 +1,37 @@
 import glob
 import argparse
 import os
+import yaml
+import re
 
-
-def convert_amp_phase_txt_to_uvbeam(folder_path):
+def convert_amp_phase_txt_to_uvbeam(beam_folder, freqs=range(50, 250), beam_type="efield", telescope_name='EIGSEP',
+                                    model_name='hera_vivaldi', feed_version='v0', model_name='vivaldi_stripped_down',
+                                    model_version='v0', history='', feed_pol='x', rotate_pol=True, x_orientation='north',
+                                    efield_to_power=True, convert_to_healpi):
     """
         Convert list of txt files to uvbeam object that can be parsed by simulator.
     """
+    # generate feed yaml
+    filenames = glob.glob(beam_folder, '.txt')
+    # extract frequencies
+    re_freq = re.compile('f=[0-9]{2,3}')
+    frequencies = [float(re_freqs.findall(fname)[0].split('=')[-1]) * 1e9 for fname in filenames]
+    # sort filenames by frequencies
+    filenames = sorted(filenames, key=lambda x: frequencies[filenames.index(x)])
+    uvb = UVBeam()
+    uvb.read_cst_beam(beam_type=beam_type, feed_pol=feed_pol, rotate_pol=True, frequency=frequencies,
+                     telescope_name=telescope_name, feed_name=feed_name, feed_version=feed_version, history=history,
+                     x_orientation=x_orientation)
+    if filetype=='efield' and efield_to_power:
+        uvb.efield_to_power()
+    if to_healpix:
+
+
+
+
+
+
+
 
 
 def convert_realimag_ffs_to_amp_phase_txt(folder_path):

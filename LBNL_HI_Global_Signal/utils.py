@@ -16,6 +16,7 @@ def initialize_telescope_yamls(
     Ntimes=864,
     polarizations=[-5, -6, -7, -8],
     telescope_location=(39.2543951, -113.3613616, 1908.0), # lat, lon, and elevation above sealevel for marjum pass.
+    antenna_positions=[(0., 0., 0.)]
     telescope_name="EIGSEP",
 ):
     """Initialize observing yaml files for simulation.
@@ -70,7 +71,6 @@ def initialize_telescope_yamls(
 
     telescope_yaml_dict = {
         "beam_paths": {0: beam_path},
-        "diameter": antenna_diameter,
         "telescope_location": f"{telescope_location}",
         "telescope_name": f"{telescope_name}",
         "x_orientation": "north",
@@ -99,7 +99,7 @@ def initialize_telescope_yamls(
     # write csv file.
     lines = []
     lines.append("Name\tNumber\tBeamID\tE    \tN    \tU\n")
-    for i, x in enumerate([0, (0., 0., 0.)]):
+    for i, x in enumerate(antenna_positions):
         lines.append(f"ANT{i}\t{i}\t{i}\t{x[0]:.4f}\t{x[1]:.4f}\t{x[2]:.4f}\n")
     if not os.path.exists(csv_name) or clobber:
         with open(csv_name, "w") as csv_file:
