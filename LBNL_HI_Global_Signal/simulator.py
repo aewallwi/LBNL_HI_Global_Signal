@@ -10,8 +10,6 @@ from hera_sim.visibilities import vis_cpu
 from pyuvsim.simsetup import initialize_uvdata_from_params, _complete_uvdata
 
 
-
-
 def compute_global_signal(
     obs_yaml,
     basename,
@@ -69,8 +67,7 @@ def compute_global_signal(
     # generate GSM cube
     fg_file_name = os.path.join(
         output_dir,
-        basename
-        + f"compressed_fg_{include_gsm}_gleam_{include_gleam}_nsrc_{nsrcs_gleam}.uvh5",
+        basename + f"compressed_fg_{include_gsm}_gleam_{include_gleam}_nsrc_{nsrcs_gleam}.uvh5",
     )
     if not os.path.exists(fg_file_name) or clobber:
         from . import skymodel

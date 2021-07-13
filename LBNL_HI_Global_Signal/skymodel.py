@@ -4,7 +4,6 @@ from .data import DATA_PATH
 import os
 
 
-
 def initialize_gsm(
     frequencies,
     nside_sky=256,

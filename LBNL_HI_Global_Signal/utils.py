@@ -15,8 +15,8 @@ def initialize_telescope_yamls(
     integration_time=100,
     Ntimes=864,
     polarizations=[-5, -6, -7, -8],
-    telescope_location=(39.2543951, -113.3613616, 1908.0), # lat, lon, and elevation above sealevel for marjum pass.
-    antenna_positions=[(0., 0., 0.)]
+    telescope_location=(39.2543951, -113.3613616, 1908.0),  # lat, lon, and elevation above sealevel for marjum pass.
+    antenna_positions=[(0.0, 0.0, 0.0)],
     telescope_name="EIGSEP",
 ):
     """Initialize observing yaml files for simulation.
@@ -67,7 +67,6 @@ def initialize_telescope_yamls(
 
     csv_name = os.path.join(output_dir, f"{basename}_antenna_layout.csv")
     telescope_yaml_name = os.path.join(output_dir, f"{basename}_telescope_defaults.yaml")
-
 
     telescope_yaml_dict = {
         "beam_paths": {0: beam_path},
