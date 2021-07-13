@@ -70,7 +70,7 @@ def initialize_telescope_yamls(
     telescope_yaml_name = os.path.join(output_dir, f"{basename}_telescope_defaults.yaml")
 
     telescope_yaml_dict = {
-        "beam_paths": {0: beam_path},
+        "beam_paths": {i: beam_path for i in range(len(antenna_positions))},
         "telescope_location": f"{telescope_location}",
         "telescope_name": f"{telescope_name}",
         "x_orientation": "north",
