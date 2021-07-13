@@ -58,6 +58,7 @@ def convert_amp_phase_txt_to_uvbeam(
         uvb.efield_to_power()
     if convert_to_healpix:
         uvb.to_healpix(nside=nside)
+        uvb.interpolation_function='healpix_simple'
     if save:
         uvb.write_beamfits(output_file, clobber=clobber)
 
