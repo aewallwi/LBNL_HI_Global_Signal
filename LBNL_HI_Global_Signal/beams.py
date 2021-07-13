@@ -71,8 +71,8 @@ def convert_realimag_ffs_to_amp_phase_txt(folder_path):
     ----------
     """
 
-    folder_path_ffs = glob.glob(os.path.join(folder_path, "/ffs"))[0]
-    outdir = glob.glob(os.path.join(folder_path, "/txt"))[0]
+    folder_path_ffs = glob.glob(os.path.join(folder_path, "ffs"))[0]
+    outdir = glob.glob(os.path.join(folder_path, "txt"))[0]
     filenames = sorted(glob.glob(os.path.join(folder_path_ffs, "*ffs")))
     freqs = np.array([float(re.findall(r"[-+]?\d*\.\d+|\d+", filename)[-2]) for filename in filenames]) * 1e-3
     order = np.argsort(freqs)
