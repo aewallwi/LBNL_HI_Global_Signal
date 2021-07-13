@@ -4,7 +4,9 @@ import os
 import yaml
 import re
 from pyuvdata import UVBeam
-
+import numpy as np
+import pandas as pd
+import scipy
 
 def convert_amp_phase_txt_to_uvbeam(
     beam_folder,
@@ -32,7 +34,7 @@ def convert_amp_phase_txt_to_uvbeam(
     filenames = glob.glob(beam_folder + "*.txt")
     # extract frequencies
     re_freq = re.compile("f=0.[0-9]{2,3}")
-    frequencies = [float(re_freqs.findall(fname)[0].split("=")[-1]) * 1e9 for fname in filenames]
+    frequencies = [float(re_freq.findall(fname)[0].split("=")[-1]) * 1e9 for fname in filenames]
     # sort filenames by frequencies
     filenames = sorted(filenames, key=lambda x: frequencies[filenames.index(x)])
     uvb = UVBeam()
@@ -49,9 +51,9 @@ def convert_amp_phase_txt_to_uvbeam(
         history=history,
         x_orientation=x_orientation,
     )
-    if filetype == "efield" and efield_to_power:
+    if beam_type == "efield" and efield_to_power:
         uvb.efield_to_power()
-    if to_healpix:
+    if convert_to_healpix:
         uvb.to_healpix(nside=nside)
     if save:
         uvb.write_beamfits(output_file, clobber=clobber)

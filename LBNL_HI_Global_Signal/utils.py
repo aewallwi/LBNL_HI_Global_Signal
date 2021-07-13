@@ -6,6 +6,7 @@ from pyuvsim.simsetup import _complete_uvdata, initialize_uvdata_from_params
 
 def initialize_telescope_yamls(
     basename,
+    beam_path,
     output_dir="./",
     clobber=False,
     df=1000e3,
@@ -14,7 +15,7 @@ def initialize_telescope_yamls(
     start_time=2459122.5835133335,  # .25108 + 8. / 24.,
     integration_time=100,
     Ntimes=864,
-    polarizations=[-5, -6, -7, -8],
+    polarization_array=[-5, -6, -7, -8],
     telescope_location=(39.2543951, -113.3613616, 1908.0),  # lat, lon, and elevation above sealevel for marjum pass.
     antenna_positions=[(0.0, 0.0, 0.0)],
     telescope_name="EIGSEP",
@@ -51,9 +52,9 @@ def initialize_telescope_yamls(
         default is 100 seconds
     Ntimes: int, optional
         number of time samples.
-    polarizations: list, optional
+    polarization_array: list, optional
         list of polarizations
-        default is [-5] ('xx')
+        default is [-5, -6, -7, -8] ('xx', 'xy', 'yx', 'yy')
     Returns
     -------
     obs_param_yaml_name: str

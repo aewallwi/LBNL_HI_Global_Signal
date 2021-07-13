@@ -8,6 +8,7 @@ import yaml
 from pyuvdata import UVData
 from hera_sim.visibilities import vis_cpu
 from pyuvsim.simsetup import initialize_uvdata_from_params, _complete_uvdata
+from . import utils
 
 
 def compute_global_signal(
@@ -30,7 +31,7 @@ def compute_global_signal(
     ----------
     obs_yaml: str
         path to pyuvsim observation yaml specifying array layout etc...
-        can be generated with garrays.initialize_telescope_yamls
+        can be generated with utils.initialize_telescope_yamls
     basename: str
         basename for outputs.
     output_dir: str, optional
@@ -72,7 +73,7 @@ def compute_global_signal(
     if not os.path.exists(fg_file_name) or clobber:
         from . import skymodel
 
-        uvdata, beams, beam_ids = garrays.initialize_uvdata(
+        uvdata, beams, beam_ids = utils.initialize_uvdata(
             output_dir=output_dir,
             clobber=clobber,
             obs_param_yaml_name=obs_yaml,
