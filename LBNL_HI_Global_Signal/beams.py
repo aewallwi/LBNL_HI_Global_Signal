@@ -39,7 +39,6 @@ def convert_amp_phase_txt_to_uvbeam(
     # sort filenames by frequencies
     filename_list = sorted(filename_list, key=lambda x: frequencies[filename_list.index(x)])
     uvb = UVBeam()
-    uvb.interpolation_function = interpolation_function
     uvb.read_cst_beam(
         filename=filename_list,
         beam_type=beam_type,
@@ -53,6 +52,7 @@ def convert_amp_phase_txt_to_uvbeam(
         feed_version=feed_version,
         history=history,
         x_orientation=x_orientation,
+        interpolation_function=interpolation_function,
     )
     if beam_type == "efield" and efield_to_power:
         uvb.efield_to_power()
