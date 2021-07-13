@@ -52,8 +52,8 @@ def convert_amp_phase_txt_to_uvbeam(
         feed_version=feed_version,
         history=history,
         x_orientation=x_orientation,
-        interpolation_function=interpolation_function,
     )
+    uvb.interpolation_function = interpolation_function
     if beam_type == "efield" and efield_to_power:
         uvb.efield_to_power()
     if convert_to_healpix:
