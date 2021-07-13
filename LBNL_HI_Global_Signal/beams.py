@@ -3,6 +3,7 @@ import argparse
 import os
 import yaml
 import re
+from pyuvdata import UVBeam
 
 def convert_amp_phase_txt_to_uvbeam(beam_folder, freqs=range(50, 250), beam_type="efield", telescope_name='EIGSEP',
                                     model_name='hera_vivaldi', feed_version='v0', model_name='vivaldi_stripped_down',
@@ -14,7 +15,7 @@ def convert_amp_phase_txt_to_uvbeam(beam_folder, freqs=range(50, 250), beam_type
     # generate feed yaml
     filenames = glob.glob(beam_folder, '.txt')
     # extract frequencies
-    re_freq = re.compile('f=[0-9]{2,3}')
+    re_freq = re.compile('f=0.[0-9]{2,3}')
     frequencies = [float(re_freqs.findall(fname)[0].split('=')[-1]) * 1e9 for fname in filenames]
     # sort filenames by frequencies
     filenames = sorted(filenames, key=lambda x: frequencies[filenames.index(x)])
