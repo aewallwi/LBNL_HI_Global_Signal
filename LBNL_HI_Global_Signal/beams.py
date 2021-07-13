@@ -31,10 +31,10 @@ def convert_amp_phase_txt_to_uvbeam(
     Convert list of txt files to uvbeam object that can be parsed by simulator.
     """
     # generate feed yaml
-    filenames = glob.glob(beam_folder + "*.txt")
+    filename_list = glob.glob(beam_folder + "*.txt")
     # extract frequencies
-    re_freq = re.compile("f=0.[0-9]{2,3}")
-    frequencies = [float(re_freq.findall(fname)[0].split("=")[-1]) * 1e9 for fname in filenames]
+    re_freq = re.compile("f=0.[0-9]{1-3}")
+    frequencies = [float(re_freq.findall(fname)[0].split("=")[-1]) * 1e9 for fname in filename_list]
     # sort filenames by frequencies
     filename_list = sorted(filenames, key=lambda x: frequencies[filenames.index(x)])
     uvb = UVBeam()
