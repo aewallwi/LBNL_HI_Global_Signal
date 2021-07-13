@@ -5,8 +5,8 @@ import yaml
 import re
 from pyuvdata import UVBeam
 
-def convert_amp_phase_txt_to_uvbeam(beam_folder, beam_type="efield", telescope_name='EIGSEP',
-                                    feed_version='v0', model_name='vivaldi_stripped_down',
+def convert_amp_phase_txt_to_uvbeam(beam_folder, beam_type="efield", telescope_name='EIGSEP', feed_name='hera_vivaldi',
+                                    feed_version='v0', model_name='hera_phaseii_conductors_only',
                                     model_version='v0', history='', feed_pol='x', rotate_pol=True, x_orientation='north',
                                     efield_to_power=True, convert_to_healpix=True, nside=256, save=False, output_file=None, clobber=False):
     """
