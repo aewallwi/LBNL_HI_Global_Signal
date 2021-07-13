@@ -39,6 +39,7 @@ def convert_amp_phase_txt_to_uvbeam(
     # sort filenames by frequencies
     filename_list = sorted(filename_list, key=lambda x: frequencies[filename_list.index(x)])
     uvb = UVBeam()
+    uvb.interpolation_function = interpolation_function
     uvb.read_cst_beam(
         filename=filename_list,
         beam_type=beam_type,
@@ -58,7 +59,6 @@ def convert_amp_phase_txt_to_uvbeam(
     if convert_to_healpix:
         uvb.to_healpix(nside=nside)
     if save:
-        uvb.interpolation_function = interpolation_function
         uvb.write_beamfits(output_file, clobber=clobber)
 
     return uvb
