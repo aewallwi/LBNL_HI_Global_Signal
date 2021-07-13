@@ -50,7 +50,7 @@ setup(
     package_dir={'LBNL_HI_Global_Signal': 'LBNL_HI_Global_Signal'},
     packages=['LBNL_HI_Global_Signal'],
     python_requires='>=3.6, <4',
-    install_requires=['pyuvdata=2.2.0',
+    install_requires=['pyuvdata==2.2.0',
                       'numpy',
                       'pygdsm @ git+git://github.com/telegraphic/pygdsm',
                       'uvtools @ git+git://github.com/HERA-Team/uvtools',
