@@ -6,7 +6,7 @@ import re
 from pyuvdata import UVBeam
 
 def convert_amp_phase_txt_to_uvbeam(beam_folder, freqs=range(50, 250), beam_type="efield", telescope_name='EIGSEP',
-                                    model_name='hera_vivaldi', feed_version='v0', model_name='vivaldi_stripped_down',
+                                    feed_version='v0', model_name='vivaldi_stripped_down',
                                     model_version='v0', history='', feed_pol='x', rotate_pol=True, x_orientation='north',
                                     efield_to_power=True, convert_to_healpix=True, nside=256, save=False, output_file=None, clobber=False):
     """
@@ -20,7 +20,7 @@ def convert_amp_phase_txt_to_uvbeam(beam_folder, freqs=range(50, 250), beam_type
     # sort filenames by frequencies
     filenames = sorted(filenames, key=lambda x: frequencies[filenames.index(x)])
     uvb = UVBeam()
-    uvb.read_cst_beam(beam_type=beam_type, feed_pol=feed_pol, rotate_pol=True, frequency=frequencies,
+    uvb.read_cst_beam(beam_type=beam_type, feed_pol=feed_pol, rotate_pol=True, frequency=frequencies, model_name=model_name,
                      telescope_name=telescope_name, feed_name=feed_name, feed_version=feed_version, history=history,
                      x_orientation=x_orientation)
     if filetype=='efield' and efield_to_power:
