@@ -55,7 +55,7 @@ setup(
                       'pygdsm @ git+git://github.com/telegraphic/pygdsm',
                       'uvtools @ git+git://github.com/HERA-Team/uvtools',
                       'pyuvsim @ git+git://github.com/RadioAstronomySoftwareGroup/pyuvsim',
-                      'hera_sim @ git+git://github.com/HERA-Team/hera_sim@v1.0.3',
+                      'hera_sim @ git+git://github.com/HERA-Team/hera_sim',
                       ],
     include_package_data=True,
     package_data={'LBNL_HI_Global_Signal': data_files},
