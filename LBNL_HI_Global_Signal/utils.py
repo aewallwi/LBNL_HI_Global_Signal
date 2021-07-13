@@ -17,7 +17,7 @@ def initialize_telescope_yamls(
     Ntimes=864,
     polarization_array=[-5, -6, -7, -8],
     telescope_location=(39.2543951, -113.3613616, 1908.0),  # lat, lon, and elevation above sealevel for marjum pass.
-    antenna_positions=[(0.0, 0.0, 0.0)],
+    antenna_positions=[(0.0, 0.0, 0.0), (10., 0.0, 0.0)],
     telescope_name="EIGSEP",
 ):
     """Initialize observing yaml files for simulation.
