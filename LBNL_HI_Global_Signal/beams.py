@@ -22,10 +22,11 @@ def convert_amp_phase_txt_to_uvbeam(
     x_orientation="north",
     efield_to_power=True,
     convert_to_healpix=True,
-    nside=256,
+    nside=64,
     save=False,
     output_file=None,
     clobber=False,
+    interpolation_function='az_za_simple'
 ):
     """
     Convert list of txt files to uvbeam object that can be parsed by simulator.
@@ -57,6 +58,7 @@ def convert_amp_phase_txt_to_uvbeam(
     if convert_to_healpix:
         uvb.to_healpix(nside=nside)
     if save:
+        uvb.interpolation_function = interpolation_function
         uvb.write_beamfits(output_file, clobber=clobber)
 
     return uvb

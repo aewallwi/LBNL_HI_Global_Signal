@@ -15,7 +15,7 @@ def compute_global_signal(
     obs_yaml,
     basename,
     output_dir="./",
-    nside_sky=256,
+    nside_sky=64,
     clobber=False,
     include_gsm=True,
     include_gleam=True,
