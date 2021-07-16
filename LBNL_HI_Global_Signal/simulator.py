@@ -20,6 +20,7 @@ def compute_global_signal(
     include_gsm=True,
     include_gleam=True,
     nsrcs_gleam=10000,
+    single_antenna=False,
 ):
     """Compute visibilities for global sky-model with white noise EoR.
 
@@ -57,6 +58,9 @@ def compute_global_signal(
     nsrcs_gleam: int, optional
         number of brightest gleam sources to include in sky model
         default is 10000
+    single_antenna: bool, optional
+        force the simulation to be a single antenna simulation
+        since pyuvsim refuses to allow this.
 
     Returns
     -------
@@ -99,4 +103,6 @@ def compute_global_signal(
         uvd_fg = UVData()
         uvd_fg.read(fg_file_name)
     # only do eor cube if file does not exist.
+    if single_antenna:
+        uvd_fg.select(bls=[ap for ap in uvd_fg.get_antpairs() if ap[0] == ap[1]][0])
     return uvd_fg

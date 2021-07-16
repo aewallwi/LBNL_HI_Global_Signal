@@ -10,7 +10,7 @@ import pathlib
 import os
 import sys
 
-sys.path.append("garray21cm")
+sys.path.append("LBNL_HI_Global_Signal")
 
 def package_files(package_dir, subdirectory):
     # walk the input package_dir/subdirectory
