@@ -26,7 +26,7 @@ def convert_amp_phase_txt_to_uvbeam(
     save=False,
     output_file=None,
     clobber=False,
-    interpolation_function='az_za_simple'
+    interpolation_function='az_za_simple',
     funits='GHz'
 ):
     """
