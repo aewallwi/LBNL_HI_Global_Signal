@@ -44,6 +44,7 @@ def convert_amp_phase_txt_to_uvbeam(
 
     # sort filenames by frequencies
     print(filename_list)
+    print(frequencies)
     filename_list = sorted(filename_list, key=lambda x: frequencies[filename_list.index(x)])
     uvb = UVBeam()
     uvb.read_cst_beam(
