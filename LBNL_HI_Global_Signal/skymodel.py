@@ -2,6 +2,8 @@ import numpy as np
 import healpy as hp
 from .data import DATA_PATH
 import os
+import pickle
+from scipy.interpolate import interp1d
 
 
 def initialize_gsm(
@@ -78,4 +80,52 @@ def add_gleam(frequencies, hp_input, nsrcs=10000):
         alpha = srcrow[-2]
         pixel = hp.ang2pix(nside, zen, ra)
         hp_input[:, pixel] += f200 * (frequencies / 200e6) ** alpha / pixarea
+    return hp_input
+
+
+def z_to_nu(redshift):
+    """
+    Redshift to frequency conversion for 21cm line
+    """
+    f0 = 1420405751.77  # rest freqeuncy in Hz
+    return f0/(z+1)
+
+def temp_to_jy(temperature, frequency, t_unit='mK', f_unit='Hz')
+    """
+    Convert brightness temperature to specific intensity (Jy/Sr)
+    """
+    c = 3e8  # speed of light in m/s
+    k = 1.38e-23  # boltzmann constant in J/K
+
+    if t_unit == 'mK':
+        temperature *= 1e3  # convert to K
+    elif t_unit != 'K':
+        raise ValueError('Invalid temperature unit, must be mK or K')
+
+    if f_unit == 'MHz':
+        frequency *= 1e6  # convert to Hz
+    elif f_unit == 'GHz':
+        frequency *= 1e9  # convert to Hz
+    elif t_unit != 'Hz':
+        raise ValueError('Invalid frequency unit, must be Hz, MHz, or GHz')
+
+    I = 2*k/c**2 * frequency**2 * temperature  # intensity in SI
+    I *= 1e26  # convert to Jy/Sr
+    return I
+
+def add_global_signal(frequencies, hp_input):
+    """
+    This adds the avg global signal everywhere across the sky
+    (i.e. sets the 21cm intensity to the all-sky avg everywhere)
+    """
+    with open(os.path.join(DATA_PATH, 'global_signal/test_21cm.pkl'), 'r') as f:
+        global_sim = pickle.load(f)
+    t21 = global_sim.history['dTb']
+    redshifts = global_sim.history['z']
+    freqs21 = z_to_nu(redshifts)
+    # interpolate global signal to the foreground frequencies
+    interpolator = interp1d(freqs21, t21, bounds_error=False, fill_value=0)
+    t21_interp = interpolator(frequencies)
+    intensity = temp_to_Jy(t21_interp, frequencies)
+    hp_input += np.tile(intensity, (1, hp_input.shape[1]))
     return hp_input
