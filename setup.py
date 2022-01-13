@@ -56,6 +56,7 @@ setup(
                       'uvtools @ git+git://github.com/HERA-Team/uvtools',
                       'pyuvsim @ git+git://github.com/RadioAstronomySoftwareGroup/pyuvsim',
                       'hera_sim @ git+git://github.com/HERA-Team/hera_sim',
+                      'scipy'
                       ],
     include_package_data=True,
     package_data={'LBNL_HI_Global_Signal': data_files},
